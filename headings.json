@@ -1,0 +1,641 @@
+{
+  "pdf": "Pain Management Handbook 2019. palliative (PDF).pdf",
+  "pdf_path": "Pain Management Handbook 2019. palliative (PDF).pdf",
+  "headings": [
+    {
+      "page": 1,
+      "top": 95.6,
+      "level": 1,
+      "font_size": 24.0,
+      "text": "Paediatric Acute Pain",
+      "children": []
+    },
+    {
+      "page": 1,
+      "top": 123.2,
+      "level": 1,
+      "font_size": 24.0,
+      "text": "Management Handbook",
+      "children": [
+        {
+          "page": 2,
+          "top": 99.4,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "CONTENTS",
+          "children": []
+        },
+        {
+          "page": 4,
+          "top": 115.4,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "1. INTRODUCTION",
+          "children": []
+        },
+        {
+          "page": 5,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "2. PRINCIPLES OF ANALGESIC ADMINISTRATION IN CHILDREN",
+          "children": []
+        },
+        {
+          "page": 6,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "3. MANAGING PAIN USING SIMPLE AND ORAL ANALGESICS",
+          "children": [
+            {
+              "page": 6,
+              "top": 129.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.1 Paracetamol",
+              "children": []
+            },
+            {
+              "page": 7,
+              "top": 145.1,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.2 Diclofenac (Voltaren)",
+              "children": []
+            },
+            {
+              "page": 7,
+              "top": 314.1,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.3 Ibuprofen (Brufen)",
+              "children": []
+            },
+            {
+              "page": 8,
+              "top": 183.0,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.4 Parecoxib (Dynastat)",
+              "children": []
+            },
+            {
+              "page": 9,
+              "top": 67.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.3 Celecoxib",
+              "children": []
+            },
+            {
+              "page": 9,
+              "top": 274.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.5 Tramadol",
+              "children": []
+            },
+            {
+              "page": 10,
+              "top": 683.0,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.6 Oral Morphine Preparations",
+              "children": []
+            },
+            {
+              "page": 11,
+              "top": 94.3,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "Morphine Elixir",
+              "children": []
+            },
+            {
+              "page": 11,
+              "top": 212.7,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "Morphine Tabs \u2013 Immediate Release (Sevredol)",
+              "children": []
+            },
+            {
+              "page": 11,
+              "top": 331.2,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "Morphine Tabs \u2013 Controlled Release (LA Morph)",
+              "children": []
+            },
+            {
+              "page": 11,
+              "top": 687.0,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.7 Oxycodone",
+              "children": []
+            },
+            {
+              "page": 12,
+              "top": 233.4,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "Oxycodone \u2013 Immediate Release (Oxynorm, Endone)",
+              "children": []
+            },
+            {
+              "page": 13,
+              "top": 373.2,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "3.8 Codeine Phosphate",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 14,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "4. MANAGING PAIN USING PARENTERAL ANALGESICS",
+          "children": [
+            {
+              "page": 14,
+              "top": 129.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "4.1 Protocol for Intermittent IV Opioids",
+              "children": []
+            },
+            {
+              "page": 14,
+              "top": 541.0,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "4.2 Protocol for Intravenous Opioid Infusions",
+              "children": []
+            },
+            {
+              "page": 16,
+              "top": 324.1,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "4.3 Protocol for Nurse Controlled Analgesia (NCA)",
+              "children": []
+            },
+            {
+              "page": 17,
+              "top": 496.4,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "4.4 Protocol for Patient Controlled Analgesia (PCA)",
+              "children": []
+            },
+            {
+              "page": 18,
+              "top": 597.5,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "4.5 Protocol for Subcutaneous Morphine Boluses",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 20,
+          "top": 115.4,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "5. MANAGING PAIN USING EPIDURALS",
+          "children": []
+        },
+        {
+          "page": 24,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "6. MANAGING PAIN USING REGIONAL INFUSIONS",
+          "children": []
+        },
+        {
+          "page": 27,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "7. MANAGING PAIN USING ENTONOX",
+          "children": []
+        },
+        {
+          "page": 29,
+          "top": 101.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "8. MANAGING ADVERSE EFFECTS & TROUBLESHOOTING",
+          "children": [
+            {
+              "page": 29,
+              "top": 153.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "8.1 LA Toxicity",
+              "children": []
+            },
+            {
+              "page": 29,
+              "top": 462.0,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.1.1 Management of Impending LA Toxicity",
+              "children": []
+            },
+            {
+              "page": 30,
+              "top": 66.7,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.1.2 Cardiac Resuscitation in the Event of Suspected LA Toxicity",
+              "children": []
+            },
+            {
+              "page": 30,
+              "top": 232.7,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "8.2 Management of Common Opioid Side-Effects",
+              "children": []
+            },
+            {
+              "page": 30,
+              "top": 275.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.2.1 Management of Overdose",
+              "children": []
+            },
+            {
+              "page": 30,
+              "top": 545.7,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.2.2 Management of Pruritus",
+              "children": []
+            },
+            {
+              "page": 31,
+              "top": 94.9,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "8.3 Management of Nausea & Vomiting",
+              "children": []
+            },
+            {
+              "page": 31,
+              "top": 476.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.3.1 PONV Prophylaxis",
+              "children": []
+            },
+            {
+              "page": 32,
+              "top": 268.5,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.3.2 PONV Treatment",
+              "children": []
+            },
+            {
+              "page": 33,
+              "top": 67.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "8.4 Management of Common Epidural Problems",
+              "children": []
+            },
+            {
+              "page": 33,
+              "top": 110.4,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.4.1 Epidural Disconnection",
+              "children": []
+            },
+            {
+              "page": 33,
+              "top": 381.0,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "\u2022",
+              "children": []
+            },
+            {
+              "page": 33,
+              "top": 394.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "\u2022",
+              "children": []
+            },
+            {
+              "page": 33,
+              "top": 462.1,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "8.4.2 Inadequate Analgesia",
+              "children": []
+            },
+            {
+              "page": 34,
+              "top": 67.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "8.5 Troubleshooting",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 35,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "9. MONITORING",
+          "children": [
+            {
+              "page": 35,
+              "top": 129.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "9.1 Pain Assessment & Measurement",
+              "children": []
+            },
+            {
+              "page": 36,
+              "top": 81.1,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "9.2 Monitoring",
+              "children": []
+            },
+            {
+              "page": 36,
+              "top": 150.6,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "9.2.1 Opioids",
+              "children": []
+            },
+            {
+              "page": 36,
+              "top": 590.4,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "9.2.2 Epidurals and Regional Infusions",
+              "children": []
+            },
+            {
+              "page": 37,
+              "top": 81.1,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "9.3 Some Normal Physiological Values for Children 0-16 Years",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 38,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "10. MANAGING PAIN FROM BURNS",
+          "children": []
+        },
+        {
+          "page": 40,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "11. OTHER ANALGESIC MEDICATIONS",
+          "children": [
+            {
+              "page": 40,
+              "top": 129.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "11.1 Fentanyl Patches",
+              "children": []
+            },
+            {
+              "page": 41,
+              "top": 283.2,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "11.2 Gabapentin",
+              "children": []
+            },
+            {
+              "page": 42,
+              "top": 416.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "11.3 Amitriptyline",
+              "children": []
+            },
+            {
+              "page": 43,
+              "top": 94.9,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "11.4 Diazepam",
+              "children": []
+            },
+            {
+              "page": 43,
+              "top": 316.8,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "11.5 Intranasal Fentanyl",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 44,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "12. PREOPERATIVE MEDICATIONS",
+          "children": [
+            {
+              "page": 44,
+              "top": 129.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "12.1 Topical Local Anaesthetics",
+              "children": []
+            },
+            {
+              "page": 44,
+              "top": 515.7,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "12.2 Premedications",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 47,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "13. MANAGING PAIN FOLLOWING TONSILLECTOMY",
+          "children": [
+            {
+              "page": 47,
+              "top": 594.9,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "Note:",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 49,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "14. MANAGING PAIN FOLLOWING SCOLIOSIS SURGERY",
+          "children": [
+            {
+              "page": 49,
+              "top": 219.0,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "14.1 Intraoperative Analgesia",
+              "children": []
+            },
+            {
+              "page": 49,
+              "top": 365.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "14.2 Postoperative Analgesia",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 51,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "15. INITIAL TREATMENT OF CHRONIC PAIN IN CHILDREN",
+          "children": [
+            {
+              "page": 51,
+              "top": 244.3,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "15.1 Types of Chronic Pain in Children",
+              "children": []
+            },
+            {
+              "page": 51,
+              "top": 709.1,
+              "level": 3,
+              "font_size": 13.97999999999999,
+              "text": "15.2 Management",
+              "children": []
+            },
+            {
+              "page": 52,
+              "top": 205.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "15.2.1 Referal to the Pain Service",
+              "children": []
+            },
+            {
+              "page": 52,
+              "top": 390.5,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "15.2.2 Initial approach and non-drug treatments",
+              "children": []
+            },
+            {
+              "page": 53,
+              "top": 413.4,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "15.2.3 Drugs",
+              "children": []
+            }
+          ]
+        },
+        {
+          "page": 55,
+          "top": 77.6,
+          "level": 2,
+          "font_size": 13.980000000000018,
+          "text": "16. PALLIATIVE CARE, TERMINAL ILLNESS AND END-OF-LIFE",
+          "children": [
+            {
+              "page": 55,
+              "top": 320.2,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "16.1 Key Aspects of Care",
+              "children": []
+            },
+            {
+              "page": 55,
+              "top": 529.7,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "16.2 Symptom Management",
+              "children": []
+            },
+            {
+              "page": 55,
+              "top": 557.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "16.2.1 General Approach",
+              "children": []
+            },
+            {
+              "page": 56,
+              "top": 66.7,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "16.2.2 Pain Management",
+              "children": []
+            },
+            {
+              "page": 57,
+              "top": 220.6,
+              "level": 3,
+              "font_size": 13.980000000000018,
+              "text": "16.3 Resources",
+              "children": []
+            },
+            {
+              "page": 57,
+              "top": 286.8,
+              "level": 3,
+              "font_size": 12.0,
+              "text": "(",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
