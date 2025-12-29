@@ -204,6 +204,77 @@ HTML_TEMPLATE = """<!doctype html>
       padding: 16px;
       display: block;
     }
+
+    .page-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .page-btn {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #1f2937;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      border-color: #2563eb;
+      color: #1d4ed8;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .page-indicator {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .section-text {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fefefe;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .section-text p {
+      margin: 8px 0;
+    }
+
+    .section-text ul {
+      margin: 12px 0;
+      padding-left: 20px;
+    }
+
+    .section-text table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    .section-text td {
+      border: 1px solid #e5e7eb;
+      padding: 4px 6px;
+      vertical-align: top;
+    }
+
+    .section-text .text-muted {
+      color: #6b7280;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -234,11 +305,11 @@ HTML_TEMPLATE = """<!doctype html>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="vendor/pdfjs/pdf.min.js"></script>
   <script>
     const pdfjsBuild = window['pdfjs-dist/build/pdf'];
     if (pdfjsBuild && pdfjsBuild.GlobalWorkerOptions) {
-      pdfjsBuild.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+      pdfjsBuild.GlobalWorkerOptions.workerSrc = 'vendor/pdfjs/pdf.worker.min.js';
       window.pdfjsLib = pdfjsBuild;
     } else {
       console.error('pdf.js failed to initialize');
@@ -443,22 +514,13 @@ HTML_TEMPLATE = """<!doctype html>
 
       content.appendChild(pdfWrapper);
 
-      const desc = document.createElement('div');
-      desc.className = 'placeholder-box';
-      desc.innerHTML = `
-        <strong>What the Teams app would do here:</strong>
-        <ol>
-          <li>Focus the PDF viewer.</li>
-          <li>Scroll to <strong>page ${node.page}</strong>.</li>
-          <li>Highlight <strong>${node.text}</strong> or show quick actions.</li>
-          <li>Surface supporting tools (drug calculators, notes, etc.).</li>
-        </ol>
-      `;
-
       if (!pdfSource) {
         pdfStatus.textContent = 'Add "pdf" to headings.json to preview the file here.';
         pdfWrapper.classList.add('error');
-        content.appendChild(desc);
+        const textDumpFallback = document.createElement('div');
+        textDumpFallback.className = 'section-text';
+        textDumpFallback.innerHTML = node.content_html || '<p class="text-muted">No extracted text for this section yet.</p>';
+        content.appendChild(textDumpFallback);
         return;
       }
 
@@ -468,17 +530,61 @@ HTML_TEMPLATE = """<!doctype html>
       canvas.className = 'pdf-canvas';
       pdfWrapper.appendChild(canvas);
 
-      try {
-        await renderPdfPage(node.page, canvas);
-        pdfStatus.textContent = `Showing page ${node.page}`;
-      } catch (err) {
-        console.error(err);
-        pdfWrapper.classList.add('error');
-        pdfStatus.textContent = 'Unable to load PDF page. Check console for details.';
-        canvas.remove();
+      const controls = document.createElement('div');
+      controls.className = 'page-controls';
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'page-btn';
+      prevBtn.textContent = '← Prev page';
+      const pageIndicator = document.createElement('span');
+      pageIndicator.className = 'page-indicator';
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'page-btn';
+      nextBtn.textContent = 'Next page →';
+      controls.appendChild(prevBtn);
+      controls.appendChild(pageIndicator);
+      controls.appendChild(nextBtn);
+      content.appendChild(controls);
+
+      const pdfDoc = await ensurePdfLoaded();
+      const totalPages = pdfDoc.numPages;
+      let activePage = node.page;
+      let isRendering = false;
+
+      function updateControls() {
+        prevBtn.disabled = activePage <= 1;
+        nextBtn.disabled = activePage >= totalPages;
+        pageIndicator.textContent = `Page ${activePage} / ${totalPages}`;
       }
 
-      content.appendChild(desc);
+      async function goToPage(targetPage) {
+        if (targetPage < 1 || targetPage > totalPages || isRendering) {
+          return;
+        }
+        isRendering = true;
+        pdfStatus.textContent = `Loading page ${targetPage}…`;
+        try {
+          await renderPdfPage(targetPage, canvas);
+          activePage = targetPage;
+          pdfStatus.textContent = `Showing page ${targetPage}`;
+        } catch (err) {
+          console.error(err);
+          pdfWrapper.classList.add('error');
+          pdfStatus.textContent = 'Unable to load PDF page. Check console for details.';
+        } finally {
+          isRendering = false;
+          updateControls();
+        }
+      }
+
+      prevBtn.addEventListener('click', () => goToPage(activePage - 1));
+      nextBtn.addEventListener('click', () => goToPage(activePage + 1));
+
+      await goToPage(node.page);
+
+      const textDump = document.createElement('div');
+      textDump.className = 'section-text';
+      textDump.innerHTML = node.content_html || '<p class="text-muted">No extracted text for this section yet.</p>';
+      content.appendChild(textDump);
     }
 
     const allChapters = collectChapters(headingsTree);
@@ -506,7 +612,8 @@ def main():
     json_path = Path(sys.argv[1])
     data = json.loads(json_path.read_text(encoding="utf-8"))
 
-    html = HTML_TEMPLATE.replace("__JSON_DATA__", json.dumps(data))
+    serialized = json.dumps(data).replace("</", "<\\/")
+    html = HTML_TEMPLATE.replace("__JSON_DATA__", serialized)
 
     output_path = json_path.with_suffix(".html")
     output_path.write_text(html, encoding="utf-8")

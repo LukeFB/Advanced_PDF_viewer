@@ -20,6 +20,7 @@ import json
 import re
 import statistics
 from collections import Counter
+from html import escape
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
 
@@ -169,8 +170,10 @@ def extract_headings(pdf_path,
                 if len(text) > 160:
                     continue
 
+                heading_id = len(headings)
                 headings.append(
                     {
+                        "id": heading_id,
                         "page": p_idx + 1,  # human-friendly page number
                         "top": top,
                         "level": level,
@@ -184,6 +187,165 @@ def extract_headings(pdf_path,
     return body_size, heading_sizes, headings, size_counts
 
 
+BULLET_CHARS = ("•", "-", "–", "—", "▪", "‣", "·")
+GAP_THRESHOLD = 14  # pdf coordinate units (~points)
+
+
+def assemble_line(words):
+    """Build a text string for a line + classify its type."""
+    if not words:
+        return "", "blank"
+
+    segments = [words[0]["text"]]
+    large_gaps = 0
+
+    for prev, curr in zip(words, words[1:]):
+        gap = float(curr["x0"]) - float(prev["x1"])
+        if gap > GAP_THRESHOLD:
+            segments.append("    ")  # emulate column spacing
+            large_gaps += 1
+        else:
+            segments.append(" ")
+        segments.append(curr["text"])
+
+    raw = "".join(segments)
+    stripped = raw.strip()
+    if not stripped:
+        return "", "blank"
+
+    if stripped[:1] in BULLET_CHARS:
+        return stripped, "bullet"
+
+    if large_gaps >= 2:
+        return raw, "table"
+
+    return stripped, "paragraph"
+
+
+def extract_lines_from_page(page, min_top=None, max_top=None):
+    """Return ordered line dicts (text + type) within optional bounds."""
+    words = page.extract_words(extra_attrs=["fontname", "size"])
+    if not words:
+        return []
+
+    grouped = {}
+    for w in words:
+        top = float(w["top"])
+        if min_top is not None and top < min_top - 0.2:
+            continue
+        if max_top is not None and top >= max_top - 0.2:
+            continue
+        key = round(top, 1)
+        grouped.setdefault(key, []).append(w)
+
+    lines = []
+    for key in sorted(grouped.keys()):
+        line_words = sorted(grouped[key], key=lambda item: item["x0"])
+        text, line_type = assemble_line(line_words)
+        if text:
+            lines.append({"text": text, "type": line_type})
+    return lines
+
+
+def format_lines_as_html(lines):
+    """Convert classified lines into lightweight semantic HTML."""
+    html_parts = []
+    list_buffer: List[str] = []
+    table_buffer: List[str] = []
+
+    bullet_strip_chars = "".join(BULLET_CHARS + (" ",))
+
+    def flush_list():
+        if list_buffer:
+            items = "".join(f"<li>{escape(item)}</li>" for item in list_buffer)
+            html_parts.append(f"<ul>{items}</ul>")
+            list_buffer.clear()
+
+    def flush_table():
+        if table_buffer:
+            rows = []
+            for row in table_buffer:
+                cells = [
+                    escape(cell.strip())
+                    for cell in re.split(r"\s{2,}", row.strip())
+                    if cell.strip()
+                ]
+                if cells:
+                    rows.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
+            if rows:
+                html_parts.append(f"<table>{''.join(rows)}</table>")
+            table_buffer.clear()
+
+    for line in lines:
+        text = line["text"]
+        line_type = line["type"]
+
+        if line_type == "bullet":
+            flush_table()
+            stripped = text.lstrip(bullet_strip_chars).strip()
+            list_buffer.append(stripped or text.strip())
+            continue
+
+        if line_type == "table":
+            flush_list()
+            table_buffer.append(text)
+            continue
+
+        if not text.strip():
+            flush_list()
+            flush_table()
+            continue
+
+        flush_list()
+        flush_table()
+        html_parts.append(f"<p>{escape(text.strip())}</p>")
+
+    flush_list()
+    flush_table()
+
+    if not html_parts:
+        return '<p class="text-muted">No text detected for this section.</p>'
+
+    return "".join(html_parts)
+
+
+def attach_section_html(pdf_path, headings):
+    """Populate each heading with an HTML snippet for its body."""
+    with pdfplumber.open(pdf_path) as pdf:
+        total_pages = len(pdf.pages)
+
+        for idx, heading in enumerate(headings):
+            start_page = heading["page"]
+            start_top = heading["top"]
+
+            end_page = total_pages
+            end_top: Optional[float] = None
+            heading_level = heading.get("level")
+
+            for next_heading in headings[idx + 1 :]:
+                next_level = next_heading.get("level")
+                if heading_level is None or next_level is None:
+                    continue
+                if next_level <= heading_level:
+                    end_page = next_heading["page"]
+                    end_top = next_heading["top"]
+                    break
+
+            section_lines = []
+            for page_num in range(start_page, end_page + 1):
+                page = pdf.pages[page_num - 1]
+                min_top = None
+                max_top = None
+                if page_num == start_page:
+                    min_top = start_top + 0.5  # skip the heading line itself
+                if end_top is not None and page_num == end_page:
+                    max_top = end_top
+                page_lines = extract_lines_from_page(page, min_top=min_top, max_top=max_top)
+                section_lines.extend(page_lines)
+
+            heading["content_html"] = format_lines_as_html(section_lines)
+
+
 def build_tree(headings):
     """
     Build a simple parent/children tree from a flat list of headings.
@@ -194,12 +356,20 @@ def build_tree(headings):
     tree = []
     stack = []
 
+    def level_value(item):
+        level = item.get("level")
+        if isinstance(level, (int, float)):
+            return level
+        return float("inf")
+
     for h in headings:
         node = dict(h)
         node["children"] = []
 
+        current_level = level_value(node)
+
         # Pop until we find a parent with a lower level
-        while stack and stack[-1]["level"] >= node["level"]:
+        while stack and level_value(stack[-1]) >= current_level:
             stack.pop()
 
         if stack:
@@ -243,6 +413,9 @@ def main():
     body_size, heading_sizes, headings, size_counts = extract_headings(
         args.pdf, max_pages=args.max_pages
     )
+
+    attach_section_html(args.pdf, headings)
+
     tree = build_tree(headings)
 
     if args.json:
