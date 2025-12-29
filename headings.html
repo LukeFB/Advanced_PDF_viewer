@@ -221,11 +221,14 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    const pdfjsLib = window['pdfjs-dist/build/pdf'];
-    if (pdfjsLib && pdfjsLib.GlobalWorkerOptions) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.6.82/pdf.worker.min.js';
+    const pdfjsBuild = window['pdfjs-dist/build/pdf'];
+    if (pdfjsBuild && pdfjsBuild.GlobalWorkerOptions) {
+      pdfjsBuild.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+      window.pdfjsLib = pdfjsBuild;
+    } else {
+      console.error('pdf.js failed to initialize');
     }
   </script>
   <script>
@@ -234,7 +237,13 @@
     const headingsTree = Array.isArray(headingData) ? headingData : (headingData.headings || []);
     const pdfSource = Array.isArray(headingData)
       ? ''
-      : (headingData.pdf || headingData.pdf_filename || headingData.pdfPath || '');
+      : (
+          headingData.pdf_path ||
+          headingData.pdf ||
+          headingData.pdf_filename ||
+          headingData.pdfPath ||
+          ''
+        );
 
     const sidebarContent = document.getElementById('sidebarContent');
     const content = document.querySelector('.content');
